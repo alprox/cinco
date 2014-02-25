@@ -1,3 +1,4 @@
+# encoding: utf-8
 # Loads up Celery Man
 # Ported from originan source by github:
 # https://github.com/github/hubot-scripts/blob/master/src/scripts/celery-man.coffee
