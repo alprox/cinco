@@ -1,17 +1,12 @@
+require 'youtube_it'
+
 class Youtube
   include Cinch::Plugin
-  
-  listen_to :message
 
-  def listen(m)
-    rx = /www\.youtube\.com\/watch\?.*v=(?<id>[A-Za-z0-9_-]+)/
-
-    if md = m.message.match(rx)
-      url = "http://gdata.youtube.com/feeds/api/videos/#{md[:id]}?v=2"
-      doc = Nokogiri::XML(open(url))
-      title = doc.xpath('//media:title/text()', {'media' => 'http://search.yahoo.com/mrss/' })
-
-      m.reply Cinch::Formatting.format("%s: #{title}" % [Format(:bold, :red, 'YouTube')])
-    end
-  end
+	match /.*(?:https?:\/\/)?(?:www\.)?youtu(?:\.be|be\.com)\/(?:watch\?v=)?(\S{10,}).*/ix, prefix:""
+	def execute(m,id)
+		client = YouTubeIt::Client.new
+		video = client.video_by(id)
+		m.reply Cinch::Formatting.format("%s: #{video.title} :: #{video.unique_id} :: Views: #{video.view_count}" % [Format(:bold, :red, 'Youtube')])
+	end
 end
