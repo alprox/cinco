@@ -9,9 +9,7 @@ require 'curb'
 require 'uri'
 require 'cgi'
 
-module Cinch
-  module Plugins
-    class Title
+class Title
       include Cinch::Plugin
       
       match /(.*http.*)/, :use_prefix => false
@@ -68,5 +66,3 @@ module Cinch
         false
       end
     end
-  end
-end
