@@ -1,5 +1,5 @@
 require 'cinch'
-require 'feedzirra'
+require 'feedjira'
 
 class Feedreader
   include Cinch::Plugin
