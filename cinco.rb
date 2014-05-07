@@ -39,7 +39,7 @@ configure do |c|
 		]
 
     c.plugins.options[Cinch::Plugins::Identify] = { :username => "cinco", :password => "haha", :type => :nickserv }
-    c.plugins.options[Cinch::Plugins::Title] = { "ignore" => [ "youtube.com", "donmai.us", "gelbooru.com", "konachan.com", "puu.sh", "exhentai.org" ] }
+    c.plugins.options[Cinch::Plugins::Title] = { "ignore" => [ "youtube.com", "donmai.us", "gelbooru.com", "konachan.com", "puu.sh", "exhentai.org", "youtu.be" ] }
 
 end
 end
