@@ -16,14 +16,15 @@ require_relative 'plugins/thom'
 require_relative 'plugins/kurre'
 require_relative 'plugins/twiddle'
 require_relative 'plugins/updown'
+require_relative 'plugins/title'
 
 bot = Cinch::Bot.new do
 configure do |c|
 	c.server = 'localhost'
 	c.channels = ["#avaruuskulttuuri"]
 	c.nick = 'cinco'
- 	c.plugins.plugins = [
-		Cinch::Plugins::Title,
+	c.plugins.plugins = [
+		Title,
 		Cinch::Plugins::Identify,
 #		Feed,
 #		Iltis,
@@ -35,8 +36,8 @@ configure do |c|
 		UpDown
 		]
 
-    c.plugins.options[Cinch::Plugins::Identify] = { :username => "cinco", :password => "haha", :type => :nickserv }
-    c.plugins.options[Cinch::Plugins::Title] = { "ignore" => [ "youtube.com", "donmai.us", "gelbooru.com", "konachan.com", "puu.sh", "exhentai.org", "youtu.be" ] }
+	c.plugins.options[Cinch::Plugins::Identify] = { :username => "cinco", :password => "haha", :type => :nickserv }
+	c.plugins.options[Title] = { "ignore" => [ "youtube.com", "donmai.us", "gelbooru.com", "konachan.com", "puu.sh", "exhentai.org", "youtu.be" ] }
 
 end
 end
