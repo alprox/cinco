@@ -3,6 +3,8 @@ GEM
   specs:
     addressable (2.3.6)
     builder (3.2.2)
+    chronic_duration (0.10.4)
+      numerizer (~> 0.1.1)
     cinch (2.1.0)
     cinch-identify (1.6.0)
       cinch (~> 2.0)
@@ -31,6 +33,7 @@ GEM
     multipart-post (2.0.0)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
+    numerizer (0.1.1)
     oauth (0.4.7)
     oauth2 (0.9.3)
       faraday (>= 0.8, < 0.10)
@@ -62,6 +65,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  chronic_duration
   cinch
   cinch-identify
   cinch-title
