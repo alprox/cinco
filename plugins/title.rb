@@ -51,7 +51,7 @@ class Title
         html = Nokogiri::HTML(call.body_str)
         title = html.at_xpath('//title')
         
-        return "No title" if title.nil?
+        ignore if title.nil?
         CGI.unescape_html title.text.gsub(/\s+/, ' ')
       end
       
