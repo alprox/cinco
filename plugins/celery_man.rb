@@ -35,14 +35,5 @@ class CeleryMan
     m.reply "Not computing. Please repeat:" if m.message.match /.*nude tayne/
     m.reply "http://i.imgur.com/yzLcf.png" if m.message.match /NUDE TAYNE/
 
-    m.reply "#{m.user.nick} oot homo" if m.message.match /!kurre/
-    m.reply "http://i.imgur.com/9W0PA.gif" if m.message.match /.*2spooky/
-    m.reply "http://i.imm.io/Tpza.gif" if m.message.match /discojytä/
-    m.reply "http://rakka.us.to/tuuhea.gif" if m.message.match /!tuuhea/
-    m.reply "http://i.imgur.com/xU6hA.gif" if m.message.match /.*tissit/
-    m.reply "I feel offended by your recent action(s). Please read http://stop-irc-bullying.eu/stop" if m.message.match /paska botti/
-    m.reply "mumble: es.rbt.asia:64420" if m.message.match /!mumble/
-    m.reply "radio: http://rakka.us.to:8000/stream" if m.message.match /!radio/
-
   end
 end
