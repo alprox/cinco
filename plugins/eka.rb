@@ -28,6 +28,10 @@ class Eka
 		  Channel(CHANNEL).send "eka"
 		end
 
+		if local.hour == 4 and local.min == 20 and local.sec == 0
+		  Channel(CHANNEL).send "420 dudebroheim"
+		end
+
 		if local.hour == 17 and local.min == 0 and local.sec == 0
 		  if local.friday?
 		    Channel(CHANNEL).send "*koff*"
