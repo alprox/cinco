@@ -8,16 +8,14 @@ require 'cinch/plugins/title'
 require 'nokogiri'
 require 'time'
 
-#require_relative 'plugins/feed'
-#require_relative 'plugins/iltis'
 require_relative 'plugins/youtube'
 require_relative 'plugins/celery_man'
 require_relative 'plugins/thom'
-require_relative 'plugins/kurre'
 require_relative 'plugins/twiddle'
 require_relative 'plugins/updown'
 require_relative 'plugins/title'
 require_relative 'plugins/eka'
+require_relative 'plugins/meemu'
 
 bot = Cinch::Bot.new do
 configure do |c|
@@ -27,12 +25,10 @@ configure do |c|
 	c.plugins.plugins = [
 		Title,
 		Cinch::Plugins::Identify,
-#		Feed,
-#		Iltis,
 		Youtube,
 		CeleryMan,
 		Thom,
-		Kurre,
+		Meemu,
 		Twiddle,
 		UpDown,
 		Eka

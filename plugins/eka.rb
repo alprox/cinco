@@ -24,7 +24,7 @@ class Eka
 		  @last_time = local.hour
 		end
 
-		if local.hour == 0 and local.min == 0 and local.sec == 0
+		if local.hour == 0 and local.min == 0 and local.sec == 10
 		  Channel(CHANNEL).send "eka"
 		end
 
