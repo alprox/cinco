@@ -16,6 +16,7 @@ require_relative 'plugins/updown'
 require_relative 'plugins/title'
 require_relative 'plugins/eka'
 require_relative 'plugins/meemu'
+require_relative 'plugins/translate'
 
 bot = Cinch::Bot.new do
 configure do |c|
@@ -31,7 +32,8 @@ configure do |c|
 		Meemu,
 		Twiddle,
 		UpDown,
-		Eka
+		Eka,
+		Translate,
 		]
 
 	c.plugins.options[Cinch::Plugins::Identify] = { :username => "cinco", :password => "haha", :type => :nickserv }

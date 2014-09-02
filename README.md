@@ -9,6 +9,7 @@ cinco is the lovable #rakkaus irc bot with many quality memes baked in. based on
 * !kurre: random quotes
 * !iltis: quotes the famous iltanymous
 * !up/down: <domain> - check if a domain is up or down for everyone
+* !hinis: will turn any sentence you provide to english
 
 ### triggers:
 * announces the title of http(s) URLs
