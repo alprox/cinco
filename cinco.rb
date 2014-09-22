@@ -1,12 +1,10 @@
-#FEED = "https://api.twitter.com/1/statuses/user_timeline.rss?screen_name=Bakayarosan" #pupu
-#INTERVAL = "60"
-#CHANNEL = "#rakkaus"
-
 require 'cinch'
 require "cinch/plugins/identify"
 require 'cinch/plugins/title'
+require 'cinch/cooldown'
 require 'nokogiri'
 require 'time'
+require 'yaml'
 
 require_relative 'plugins/youtube'
 require_relative 'plugins/celery_man'
@@ -19,11 +17,16 @@ require_relative 'plugins/meemu'
 require_relative 'plugins/translate'
 require_relative 'plugins/hinis'
 
+Conf = YAML.load_file("config.yml")
+
 bot = Cinch::Bot.new do
 configure do |c|
-	c.server = 'localhost'
-	c.channels = ["#avaruuskulttuuri"]
-	c.nick = 'cinco'
+	c.server = Conf[:irc][:server]
+	c.port = Conf[:irc][:port]
+	c.nick = Conf[:irc][:nick]
+	c.user = Conf[:irc][:user]
+	c.realname = Conf[:irc][:realname]
+	c.channels = Conf[:irc][:channels]
 	c.plugins.plugins = [
 		Title,
 		Cinch::Plugins::Identify,
@@ -38,10 +41,10 @@ configure do |c|
 		Hinis
 		]
 
-	c.plugins.options[Cinch::Plugins::Identify] = { :username => "cinco", :password => "haha", :type => :nickserv }
-	c.plugins.options[Title] = { "ignore" => [ "youtube.com", "donmai.us", "gelbooru.com", "konachan.com", "puu.sh", "exhentai.org", "youtu.be" ] }
+	c.plugins.options[Cinch::Plugins::Identify] = Conf[:irc_auth]
+	c.plugins.options[Title] = Conf[:title][:ignore]
+#	c.shared[:cooldown] = Conf[:cooldown]
 	c.shared[:cooldown] = { :config => { '#rakkaus' => { :global => 10, :user => 20 } } }
-
 end
 end
 

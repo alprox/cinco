@@ -27,9 +27,8 @@ class Hinis
 	  end
 	elsif m.user.host == "nallepuku.info" and m.user.user == "hinanai" and @turning == true
 
-
 	  begin
-		url = open("https://api.datamarket.azure.com/Bing/MicrosoftTranslator/v1/Translate?Text=%27#{URI.escape(m.message)}%27&To=%27en%27", :http_basic_authentication=>[$AZUREU, $AZUREP])
+		url = open("https://api.datamarket.azure.com/Bing/MicrosoftTranslator/v1/Translate?Text=%27#{URI.escape(m.message)}%27&To=%27en%27", :http_basic_authentication=>[Conf[:azure][:user], Conf[:azure][:pass]])
 		url = Nokogiri::XML(url)
 
 		result = url.xpath("//d:Text").text
