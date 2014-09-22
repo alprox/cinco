@@ -17,6 +17,7 @@ require_relative 'plugins/title'
 require_relative 'plugins/eka'
 require_relative 'plugins/meemu'
 require_relative 'plugins/translate'
+require_relative 'plugins/hinis'
 
 bot = Cinch::Bot.new do
 configure do |c|
@@ -34,10 +35,12 @@ configure do |c|
 		UpDown,
 		Eka,
 		Translate,
+		Hinis
 		]
 
 	c.plugins.options[Cinch::Plugins::Identify] = { :username => "cinco", :password => "haha", :type => :nickserv }
 	c.plugins.options[Title] = { "ignore" => [ "youtube.com", "donmai.us", "gelbooru.com", "konachan.com", "puu.sh", "exhentai.org", "youtu.be" ] }
+	c.shared[:cooldown] = { :config => { '#rakkaus' => { :global => 10, :user => 20 } } }
 
 end
 end

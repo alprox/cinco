@@ -1,8 +1,11 @@
 # Modified from https://github.com/bounb/choadbot/blob/master/plugins/translate/translate.rb thank you!
 # encoding: utf-8
+require 'cinch/cooldown'
 
 class Translate
 	include Cinch::Plugin
+
+	enforce_cooldown
 
 	match /hinis (.*)/iu
 
@@ -16,7 +19,7 @@ class Translate
 
 			m.reply "#{result}"
 		rescue
-			m.reply "haista vittu"
+			m.reply "#{m.user.nick}: haista vittu"
 		end
 	end
 end
