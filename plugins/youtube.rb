@@ -7,6 +7,6 @@ class Youtube
 	def execute(m,id)
 		client = YouTubeIt::Client.new
 		video = client.video_by(id)
-		m.reply Cinch::Formatting.format("%s: #{video.title} :: #{video.unique_id} :: Views: #{video.view_count}" % [Format(:bold, :red, 'Youtube')])
+		m.reply Cinch::Formatting.format("%s: #{video.title} :: #{video.unique_id} :: #{video.author.name} :: Views: #{video.view_count}" % [Format(:bold, :red, 'Youtube')])
 	end
 end

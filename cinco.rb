@@ -1,21 +1,16 @@
-require 'cinch'
-require "cinch/plugins/identify"
-require 'cinch/plugins/title'
-require 'cinch/cooldown'
-require 'nokogiri'
-require 'time'
+#!/usr/bin/env ruby
+# encoding: utf-8
+
+plugins = File.join(File.expand_path('..', __FILE__), '/plugins')
+$:.unshift plugins unless $:.include?(plugins)
+require 'bundler'
+Bundler.require
+
 require 'yaml'
 
-require_relative 'plugins/youtube'
-require_relative 'plugins/celery_man'
-require_relative 'plugins/thom'
-require_relative 'plugins/twiddle'
-require_relative 'plugins/updown'
-require_relative 'plugins/title'
-require_relative 'plugins/eka'
-require_relative 'plugins/meemu'
-require_relative 'plugins/translate'
-require_relative 'plugins/hinis'
+%w( eka meemu thom translate tweet_stream youtube celery_man hinis title twiddle updown ).each {|file|
+  require file
+}
 
 Conf = YAML.load_file("config.yml")
 
@@ -38,14 +33,16 @@ configure do |c|
 		UpDown,
 		Eka,
 		Translate,
-		Hinis
+		Hinis,
+		Cinch::Plugins::TweetStream
 		]
 
-	c.plugins.options[Cinch::Plugins::Identify] = Conf[:irc_auth]
-	c.plugins.options[Title] = Conf[:title][:ignore]
-#	c.shared[:cooldown] = Conf[:cooldown]
-	c.shared[:cooldown] = { :config => { '#rakkaus' => { :global => 10, :user => 20 } } }
+	c.plugins.options[Cinch::Plugins::Identify] = Conf[:irc][:irc_auth]
+	c.plugins.options[Title] = Conf[:title]
+	c.shared[:cooldown] = Conf[:cooldown]
 end
 end
+
+Thread.new { ::TweetStream.new(bot).run }
 
 bot.start
