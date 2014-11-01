@@ -37,7 +37,7 @@ configure do |c|
 		Cinch::Plugins::TweetStream
 		]
 
-	c.plugins.options[Cinch::Plugins::Identify] = Conf[:irc][:irc_auth]
+	c.plugins.options[Cinch::Plugins::Identify] = Conf[:irc_auth]
 	c.plugins.options[Title] = Conf[:title]
 	c.shared[:cooldown] = Conf[:cooldown]
 end

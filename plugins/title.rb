@@ -45,8 +45,8 @@ class Title
         
         call = Curl::Easy.perform(uri) do |easy| 
           easy.follow_location = true
-	  easy.useragent = Conf[:net][:useragent]
-          easy.max_redirects = Conf[:net][:redirects]
+	  easy.max_redirects = config["max_redirects"]
+	  easy.headers["User-Agent"] = config["user_agent"] || 'cinch'
         end
         
         html = Nokogiri::HTML(call.body_str)

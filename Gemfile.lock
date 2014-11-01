@@ -1,3 +1,17 @@
+GIT
+  remote: git://github.com/kylejginavan/youtube_it.git
+  revision: f61ed0b00905e048dcbed12457d02f52ddbae45d
+  specs:
+    youtube_it (2.4.1)
+      builder
+      excon
+      faraday (>= 0.8, < 0.10)
+      json (~> 1.8)
+      nokogiri (~> 1.6.0)
+      oauth (~> 0.4.4)
+      oauth2 (~> 1.0.0)
+      simple_oauth (>= 0.1.5)
+
 PATH
   remote: plugins/
   specs:
@@ -19,7 +33,7 @@ GEM
       cinch (~> 2.0)
     curb (0.8.6)
     equalizer (0.0.9)
-    excon (0.39.6)
+    excon (0.40.0)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
     feedjira (1.4.0)
@@ -67,15 +81,6 @@ GEM
       memoizable (~> 0.4.0)
       naught (~> 1.0)
       simple_oauth (~> 0.2.0)
-    youtube_it (2.4.2)
-      builder
-      excon
-      faraday (>= 0.8, < 0.10)
-      json (~> 1.8)
-      nokogiri (~> 1.6.0)
-      oauth (~> 0.4.4)
-      oauth2 (~> 1.0.0)
-      simple_oauth (>= 0.1.5)
 
 PLATFORMS
   ruby
@@ -91,4 +96,4 @@ DEPENDENCIES
   nokogiri
   open-uri-cached
   twitter
-  youtube_it
+  youtube_it!
