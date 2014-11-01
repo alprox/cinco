@@ -3,7 +3,7 @@ require 'youtube_it'
 class Youtube
   include Cinch::Plugin
 
-	match /.*(?:youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/ix, prefix:""
+	match /.*(?:youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([a-zA-Z0-9_-]+)/ix, prefix:""
 	def execute(m,id)
 		client = YouTubeIt::Client.new
 		video = client.video_by(id)
