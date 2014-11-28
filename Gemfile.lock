@@ -40,6 +40,7 @@ GEM
       curb (~> 0.8)
       loofah (~> 2.0)
       sax-machine (~> 1.0)
+    htmlentities (4.3.2)
     http (0.6.2)
       http_parser.rb (~> 0.6.0)
     http_parser.rb (0.6.0)
@@ -92,6 +93,7 @@ DEPENDENCIES
   cinch-identify
   cinch-title (= 0.3.1)!
   feedjira
+  htmlentities
   json
   nokogiri
   open-uri-cached
