@@ -8,6 +8,7 @@ class Youtube
 		client = YouTubeIt::Client.new
 		video = client.video_by(id)
 		views = video.view_count.to_s.reverse.scan(/\d{3}|.+/).join(",").reverse # fancy
-		m.reply Cinch::Formatting.format("%s: #{video.title} :: #{video.unique_id} :: #{video.author.name} :: #{views}" % [Format(:bold, :red, 'Youtube')])
+		duration = Time.at(video.duration).utc.strftime("%H:%M:%S") # wow whoa
+		m.reply Cinch::Formatting.format("%s: #{video.title} :: #{video.unique_id} :: #{video.author.name} :: #{views} :: #{duration}" % [Format(:bold, :red, 'Youtube')])
 	end
 end
