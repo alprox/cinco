@@ -42,7 +42,7 @@ class Hinis
 	  begin
 
 	  	# lets remove irc color control chars
-	  	smessage = m.message.gsub(/[[:cntrl:]]((\d{1,2},\d{1,2})|(\d{1,2}))/, '')
+	  	smessage = m.message.gsub(/[[:cntrl:]]((\d{1,2},\d{1,2})|(\d{1,2}))|[[:cntrl:]]/, '')
 		url = open("https://api.datamarket.azure.com/Bing/MicrosoftTranslator/v1/Translate?Text=%27#{URI.escape(smessage)}%27&To=%27en%27", :http_basic_authentication=>[Conf[:azure][:user], Conf[:azure][:pass]])
 		url = Nokogiri::XML(url)
 
