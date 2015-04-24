@@ -19,24 +19,25 @@ class TweetStream
   def run
 
     # keywords
-    track = Conf[:tweetstream][:track].join(',')
+    #track = Conf[:tweetstream][:track].join(',')
     # integers
     follow = Conf[:tweetstream][:follow].join(',')
 
     bot.loggers.info "Starting filter"
-    client.filter(follow: follow, track: track) do |object|
-    # no retweets or replies please
-    if object.retweet? or object.reply?
-    bot.loggers.info "I don't care: #{object.inspect}"
-    elsif follow.include?(String(object.user.id))
-      case object
-      when Twitter::Tweet then handle_tweet(object)
-      else handle_object(object)
-      end
-    else
+    client.filter(follow: follow) do |object|
+    case object
+      when Twitter::Streaming::DeletedTweet
+         then handle_deleted(object)
+      when Twitter::Streaming::StallWarning
+         then bot.loggers.error "Stalling!"
+      when Twitter::Tweet
+         then handle_tweet(object) 
+      else
+         handle_object(object)
+    end
+
     # otherwise go fuck yourself twitter
     bot.loggers.info "I don't care: #{object.inspect}" 
-    end
     end
   rescue => e
     bot.loggers.error "Tweetstream failed!! #{e.inspect} — retry in 120secs."
@@ -46,9 +47,19 @@ class TweetStream
 
   private
   def handle_tweet(tweet)
-    text = HTMLEntities.new.decode(tweet.full_text)
+    # no retweets or replies please
+    if tweet.retweet? or tweet.reply?
+      bot.loggers.info "I don't care: #{tweet.user.screen_name}: #{tweet.full_text}"
+    else
+      text = HTMLEntities.new.decode(tweet.full_text)
+      bot.loggers.info "Tweet: #{tweet.inspect}"
+      send_to_channel "#{tweet.user.screen_name}: #{text}"
+    end
+  end
+
+  def handle_deleted(tweet)
     bot.loggers.info "Tweet: #{tweet.inspect}"
-    send_to_channel "#{tweet.user.screen_name}: #{text}"
+    send_to_channel "Poistettu: #{tweet.user_id} #{tweet.id}"
   end
 
   def handle_object(object)
