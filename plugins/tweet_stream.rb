@@ -46,14 +46,23 @@ class TweetStream
   private
   def handle_tweet(tweet)
     # no retweets or replies please
-    if tweet.retweet? or tweet.reply?
-      bot.loggers.info "I don't care: #{tweet.user.screen_name}: #{tweet.full_text}"
+    if tweet.retweet?
+      bot.loggers.info "Retweet: #{tweet.user.screen_name}: #{tweet.full_text}"
+      format_tweet(tweet)
+    elsif !tweet.reply?
+      format_tweet(tweet)
+    elsif tweet.in_reply_to_user_id == Conf[:tweetstream][:bot_id]
+      format_tweet(tweet)
     else
-      text = HTMLEntities.new.decode(tweet.full_text)
-      bot.loggers.info "Tweet: #{tweet.inspect}"
-      send_to_channel "[#{@reply_id}] #{tweet.user.screen_name}: #{text}"
-      save_tweet(tweet)
+      bot.loggers.info "Retweet: #{tweet.user.screen_name}: #{tweet.full_text}"
     end
+  end
+
+  def format_tweet(tweet)
+    text = HTMLEntities.new.decode(tweet.full_text)
+    bot.loggers.info "Tweet: #{tweet.inspect}"
+    send_to_channel "[#{@reply_id}] #{tweet.user.screen_name}: #{text}"
+    save_tweet(tweet)
   end
 
   def handle_deleted(tweet)
