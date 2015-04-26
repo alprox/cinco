@@ -8,7 +8,7 @@ Bundler.require
 
 require 'yaml'
 
-%w( eka meemu thom translate tweet_stream youtube celery_man hinis title twiddle updown ).each {|file|
+%w( eka meemu thom translate tweet_stream twitter_client youtube celery_man hinis title twiddle updown ).each {|file|
   require file
 }
 
@@ -34,7 +34,8 @@ configure do |c|
 		Eka,
 		Translate,
 		Hinis,
-		Cinch::Plugins::TweetStream
+		Cinch::Plugins::TweetStream,
+		Cinch::Plugins::TwitterClient
 		]
 
 	c.plugins.options[Cinch::Plugins::Identify] = Conf[:irc_auth]

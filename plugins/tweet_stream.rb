@@ -3,6 +3,7 @@ require 'htmlentities'
 
 class TweetStream
   EVENT_KEY = :twitter_user_stream
+  TWEETS = :twitter_tweets
 
   attr_reader :bot, :client
 
@@ -14,12 +15,12 @@ class TweetStream
       config.access_token        = Conf[:twitter][:access_token]
       config.access_token_secret = Conf[:twitter][:access_token_secret]
     end
+    @tweets = Array.new(100)
+    @reply_id = 0
   end
 
   def run
 
-    # keywords
-    #track = Conf[:tweetstream][:track].join(',')
     # integers
     follow = Conf[:tweetstream][:follow].join(',')
 
@@ -35,9 +36,6 @@ class TweetStream
       else
          handle_object(object)
     end
-
-    # otherwise go fuck yourself twitter
-    bot.loggers.info "I don't care: #{object.inspect}" 
     end
   rescue => e
     bot.loggers.error "Tweetstream failed!! #{e.inspect} — retry in 120secs."
@@ -53,7 +51,8 @@ class TweetStream
     else
       text = HTMLEntities.new.decode(tweet.full_text)
       bot.loggers.info "Tweet: #{tweet.inspect}"
-      send_to_channel "#{tweet.user.screen_name}: #{text}"
+      send_to_channel "[#{@reply_id}] #{tweet.user.screen_name}: #{text}"
+      save_tweet(tweet)
     end
   end
 
@@ -68,6 +67,15 @@ class TweetStream
 
   def send_to_channel(text)
     bot.handlers.dispatch(EVENT_KEY, nil, text)
+  end
+
+  def save_tweet(tweet)
+    bot.handlers.dispatch(TWEETS, nil, @reply_id, tweet)
+
+    @reply_id += 1
+    if @reply_id > 99
+       @reply_id = 0
+    end
   end
 
 end
