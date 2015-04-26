@@ -51,10 +51,10 @@ class TweetStream
       format_tweet(tweet)
     elsif !tweet.reply?
       format_tweet(tweet)
-    elsif tweet.in_reply_to_user_id == Conf[:tweetstream][:bot_id]
+    elsif tweet.in_reply_to_user_id == Conf[:tweetstream][:bot_id][0]
       format_tweet(tweet)
     else
-      bot.loggers.info "Retweet: #{tweet.user.screen_name}: #{tweet.full_text}"
+      bot.loggers.info "Reply: #{tweet.user.screen_name}: #{tweet.full_text}"
     end
   end
 
