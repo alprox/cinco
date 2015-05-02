@@ -48,7 +48,6 @@ class TweetStream
     # no retweets or replies please
     if tweet.retweet?
       bot.loggers.info "Retweet: #{tweet.user.screen_name}: #{tweet.full_text}"
-      format_tweet(tweet)
     elsif !tweet.reply?
       format_tweet(tweet)
     elsif tweet.in_reply_to_user_id == Conf[:tweetstream][:bot_id][0]
