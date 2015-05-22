@@ -8,8 +8,11 @@ cinco is the lovable #rakkaus irc bot with many quality memes baked in. based on
 * !radio: announces the http shoutcast url
 * !kurre: random quotes
 * !iltis: quotes the famous iltanymous
-* !up/down: <domain> - check if a domain is up or down for everyone
-* !hinis: will turn any sentence you provide to english
+* !up/down: `<domain>` - check if a domain is up or down for everyone
+* !hinis `<text>`: will turn any sentence you provide to english
+* !twiittaa `<tweet>`: tweets with the twitter bot
+* @twitter_handle `<tweet>`: tweet to a twitter handle
+* !vastaa `[id]` `<tweet>`: replies to a corresponding tweet
 
 ### triggers:
 * announces the title of http(s) URLs
@@ -18,5 +21,6 @@ cinco is the lovable #rakkaus irc bot with many quality memes baked in. based on
 * announces 420 in the local time
 * announces the time to open the first beer can every friday
 * announces the time to get up and get the babylon's wheels rolling every monday
+* posts tweets from twitter users of various degrees of importance
 * various celery man functions (see https://www.youtube.com/watch?v=XWX4GUYGQXQ)
 * various funny and hilarious gifs
